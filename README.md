@@ -9,3 +9,18 @@ In your `.emacs-live.el` add this snippet:
 ```elisp
 (live-add-packs '(chat-pack))
 ```
+
+# setup
+
+Adding a line to the file `~/.authinfo`:
+
+```txt
+machine jabber login your-email@gmail.com password your-password-for-this-account
+```
+
+*Note* Do not change `machine jabber`, this is static and used by this pack.
+
+Example:
+```txt
+machine jabber login tony@gmail.com password your-password-for-this-account
+```

@@ -3,7 +3,7 @@
 
 (require 'netrc)
 
-;; load the entry tony-blog in the ~/.netrc, we obtain a hash-map with the needed data
+;; load the entry jabber in the ~/.netrc, we obtain a hash-map with the needed data
 (setq cred (netrc-machine (netrc-parse "~/.authinfo") "jabber" t))
 
 ;; Jabber client configuration

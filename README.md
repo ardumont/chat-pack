@@ -24,3 +24,7 @@ Example:
 ```txt
 machine jabber login tony@gmail.com password your-password-for-this-account
 ```
+
+# run
+
+`M-x jabber-connect`

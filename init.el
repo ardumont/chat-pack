@@ -1,3 +1,9 @@
+;;; chat-pack.el --- jabber setup
+
+;;; Commentary:
+
+;;; Code:
+
 (install-packs '(jabber))
 
 ;; ===================== lib deps
@@ -44,3 +50,6 @@
   (chat-pack/log (concat "You need to setup the credentials file " *CHAT-PACK-CREDENTIALS-FILE* " for this to work.\n"
                    "Here is the needed content to setup to your need into '" *CHAT-PACK-CREDENTIALS-FILE* "':\n"
                    "machine jabber login <your-gmail-login> password <your-gmail-password>")))
+
+
+;;; chat-pack.el ends here

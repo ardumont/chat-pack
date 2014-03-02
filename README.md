@@ -3,14 +3,24 @@ chat-pack
 
 A pack to setup one's irc credentials.
 
-# install
+# Install
 
-In your `.emacs-live.el` add this snippet:
+This is compatible with [emacs-live-packs](https://github.com/ardumont/emacs-live-packs) and [prelude-packs](https://github.com/ardumont/prelude-packs).
+
+## [emacs-live-packs](https://github.com/ardumont/emacs-live-packs)
+
+Add this snippet in your `.emacs-live.el`:
 ```elisp
-(live-add-packs '("/path/to/chat-pack"))
+(emacs-live-packs/add-live-packs "~/.emacs-live-packs/" '("chat-pack"))
 ```
 
-# setup
+## [prelude-packs](https://github.com/ardumont/prelude-packs)
+
+Add this snippet in your `prelude-packs.el`:
+```elisp
+(prelude-packs/load-packs "~/.prelude-packs/" '("chat-pack"))
+```
+# Setup
 
 Adding a line to the file `~/.authinfo`:
 
@@ -25,6 +35,6 @@ Example:
 machine jabber login tony@gmail.com password your-password-for-this-account
 ```
 
-# run
+# Run
 
 `M-x jabber-connect`

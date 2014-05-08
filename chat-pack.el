@@ -55,7 +55,5 @@
                            "Here is the needed content to setup to your need into '" *CHAT-PACK-CREDENTIALS-FILE* "':\n"
                            "machine jabber login <your-gmail-login> password <your-gmail-password>"))))
 
-(chat-pack/load-pack!)
-
 (provide 'chat-pack)
 ;;; chat-pack.el ends here

@@ -13,34 +13,34 @@
 
 ;; ===================== setup file
 
-(setq *CHAT-PACK-CREDENTIALS-FILE* "~/.authinfo")
+(defvar *CHAT-PACK-CREDENTIALS-FILE* "~/.authinfo" "Default credentials file.")
 
 ;; ===================== setup functions
 
-(defun chat-pack/log (str) "A log function for the pack."
+(defun chat-pack/log (str)
+  "Log the message STR."
   (message "chat-pack - %s" str))
 
 (defun chat-pack/setup-possible-p (creds-file)
-  "Check if the setup is possible by checking the existence of the file and that the entry 'jabber' exists."
+  "Check if the setup is possible by checking the existence of the file CREDS-FILE and that the entry 'jabber' exists."
   (let ((parsed-file (netrc-parse creds-file)))
     (and parsed-file ;; nil if the file does not exist
          (netrc-machine parsed-file "jabber"))))
 
 (defun chat-pack/setup (creds-file)
-  ;; load the entry jabber in the ~/.netrc, we obtain a hash-map with the needed data
-  (setq cred (netrc-machine (netrc-parse creds-file) "jabber" t))
+  "Chat-pack setup from the CREDS-FILE."
+  (let ((cred (netrc-machine (netrc-parse creds-file) "jabber" t)))
+    ;; Jabber client configuration
+    (setq jabber-account-list
+          `((,(netrc-get cred "login")
+             (:password . ,(netrc-get cred "password"))
+             (:nickname . ,(netrc-get cred "login"))
+             (:network-server . "talk.google.com")
+             (:connection-type . ssl)
+             (:port . 5223))))
 
-  ;; Jabber client configuration
-  (setq jabber-account-list
-        `((,(netrc-get cred "login")
-           (:password . ,(netrc-get cred "password"))
-           (:nickname . ,(netrc-get cred "login"))
-           (:network-server . "talk.google.com")
-           (:connection-type . ssl)
-           (:port . 5223))))
-
-  (setq jabber-vcard-avatars-retrieve nil
-        jabber-chat-buffer-show-avatar nil))
+    (setq jabber-vcard-avatars-retrieve nil
+          jabber-chat-buffer-show-avatar nil)))
 
 ;; ===================== setup routine
 

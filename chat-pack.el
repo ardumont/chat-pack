@@ -5,7 +5,7 @@
 ;;; Code:
 
 (require 'install-packages-pack)
-(install-packs '(jabber))
+(install-packages-pack/install-packs '(jabber))
 
 ;; ===================== lib deps
 

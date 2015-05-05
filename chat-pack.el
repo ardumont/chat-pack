@@ -13,7 +13,7 @@
 
 ;; ===================== setup file
 
-(defvar *CHAT-PACK-CREDENTIALS-FILE* "~/.authinfo" "Default credentials file.")
+(defvar *CHAT-PACK-CREDENTIALS-FILE* "~/.authinfo.gpg" "Default credentials file.")
 
 ;; ===================== setup functions
 

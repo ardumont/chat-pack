@@ -33,13 +33,17 @@
          (jabber-description (creds/get creds-file-content "jabber"))
          (login              (creds/get-entry jabber-description "login"))
          (password           (creds/get-entry jabber-description "password"))
-         (server             (creds/get-entry jabber-description "server")))
+         (server             (creds/get-entry jabber-description "server"))
+         (connection-type    (creds/get-entry jabber-description "connection-type"))
+         (connection-port    (creds/get-entry jabber-description "connection-port")))
     ;; Jabber client configuration
     (setq jabber-account-list
           `((,login
              (:password . ,password)
              (:nickname . ,login)
-             (:network-server . ,server))))
+             (:network-server . ,server)
+             (:connection-type . ,connection-type)
+             (:port . ,connection-port))))
 
     (setq jabber-vcard-avatars-retrieve nil
           jabber-chat-buffer-show-avatar nil)))
@@ -55,7 +59,7 @@
              (chat-pack/log "Setup done!"))
     (chat-pack/log (concat "You need to setup the credentials file " *CHAT-PACK-CREDENTIALS-FILE* " for this to work.\n"
                            "Here is the needed content to setup to your need into '" *CHAT-PACK-CREDENTIALS-FILE* "':\n"
-                           "machine jabber login <your-gmail-login> password <your-gmail-password>"))))
+                           "machine jabber login <your-login> password <your-password> server <server> connection-type <connection-type> connection-port <connection-port>"))))
 
 (provide 'chat-pack)
 ;;; chat-pack.el ends here

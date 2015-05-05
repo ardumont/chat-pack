@@ -5,7 +5,7 @@
 ;;; Code:
 
 (require 'install-packages-pack)
-(install-packages-pack/install-packs '(jabber))
+(install-packages-pack/install-packs '(jabber creds))
 
 ;; ===================== lib deps
 
@@ -29,15 +29,17 @@
 
 (defun chat-pack/setup (creds-file)
   "Chat-pack setup from the CREDS-FILE."
-  (let ((cred (netrc-machine (netrc-parse creds-file) "jabber" t)))
+  (let* ((creds-file-content (creds/read-lines creds-file))
+         (jabber-description (creds/get creds-file-content "jabber"))
+         (login              (creds/get-entry jabber-description "login"))
+         (password           (creds/get-entry jabber-description "password"))
+         (server             (creds/get-entry jabber-description "server")))
     ;; Jabber client configuration
     (setq jabber-account-list
-          `((,(netrc-get cred "login")
-             (:password . ,(netrc-get cred "password"))
-             (:nickname . ,(netrc-get cred "login"))
-             (:network-server . "talk.google.com")
-             (:connection-type . ssl)
-             (:port . 5223))))
+          `((,login
+             (:password . ,password)
+             (:nickname . ,login)
+             (:network-server . ,server))))
 
     (setq jabber-vcard-avatars-retrieve nil
           jabber-chat-buffer-show-avatar nil)))

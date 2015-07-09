@@ -77,6 +77,7 @@
     (define-key map (kbd "C-c c l") 'chat-pack/load-pack!)
     (define-key map (kbd "C-c c c") 'chat-pack/connect-or-switch-to-buffer)
     (define-key map (kbd "C-c c d") 'chat-pack/disconnect)
+    (define-key map (kbd "C-c c w") 'jabber-chat-with)
     map)
   "Keymap for git-pack mode.")
 

@@ -48,11 +48,14 @@
     (setq jabber-vcard-avatars-retrieve nil
           jabber-chat-buffer-show-avatar nil)))
 
-(defun chat-pack/connect ()
+(defun chat-pack/connect-or-switch-to-buffer ()
   "Start the chat."
   (interactive)
-  (call-interactively #'jabber-connect)
-  (switch-to-buffer "*-jabber-roster-*"))
+  (let* ((buffer-name "*-jabber-roster-*")
+         (buffer (get-buffer buffer-name)))
+    (if buffer
+        (switch-to-buffer buffer-name)
+      (call-interactively #'jabber-connect))))
 
 (defalias 'chat-pack/disconnect 'jabber-disconnect)
 
@@ -72,7 +75,7 @@
 (defvar chat-pack-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c c l") 'chat-pack/load-pack!)
-    (define-key map (kbd "C-c c c") 'chat-pack/connect)
+    (define-key map (kbd "C-c c c") 'chat-pack/connect-or-switch-to-buffer)
     (define-key map (kbd "C-c c d") 'chat-pack/disconnect)
     map)
   "Keymap for git-pack mode.")

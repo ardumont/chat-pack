@@ -4,8 +4,9 @@
 
 ;;; Code:
 
-(require 'install-packages-pack)
-(install-packages-pack/install-packs '(jabber creds))
+(use-package jabber)
+(use-package creds)
+(use-package jabber-otr )
 
 ;; ===================== lib deps
 

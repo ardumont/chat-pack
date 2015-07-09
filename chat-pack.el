@@ -52,7 +52,7 @@
   "Start the chat."
   (interactive)
   (call-interactively #'jabber-connect)
-  (switch-to-buffer "*-jabber-*"))
+  (switch-to-buffer "*-jabber-roster-*"))
 
 (defalias 'chat-pack/disconnect 'jabber-disconnect)
 

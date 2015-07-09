@@ -35,18 +35,26 @@
          (password           (creds/get-entry jabber-description "password"))
          (server             (creds/get-entry jabber-description "server"))
          (connection-type    (creds/get-entry jabber-description "connection-type"))
-         (connection-port    (creds/get-entry jabber-description "connection-port")))
-    ;; Jabber client configuration
+         (connection-port    (creds/get-entry jabber-description "connection-port"))
+         (jabber-server      (creds/get-entry jabber-description "jabber-server")))
     (setq jabber-account-list
           `((,login
              (:password . ,password)
              (:nickname . ,login)
              (:network-server . ,server)
-             (:connection-type . ,connection-type)
-             (:port . ,connection-port))))
+             (:connection-type . ,(intern connection-type))
+             (:port . ,(string-to-int connection-port)))))
 
     (setq jabber-vcard-avatars-retrieve nil
           jabber-chat-buffer-show-avatar nil)))
+
+(defun chat-pack/connect ()
+  "Start the chat."
+  (interactive)
+  (call-interactively #'jabber-connect)
+  (switch-to-buffer "*-jabber-*"))
+
+(defalias 'chat-pack/disconnect 'jabber-disconnect)
 
 ;; ===================== setup routine
 
@@ -60,6 +68,29 @@
     (chat-pack/log (concat "You need to setup the credentials file " *CHAT-PACK-CREDENTIALS-FILE* " for this to work.\n"
                            "Here is the needed content to setup to your need into '" *CHAT-PACK-CREDENTIALS-FILE* "':\n"
                            "machine jabber login <your-login> password <your-password> server <server> connection-type <connection-type> connection-port <connection-port>"))))
+
+(defvar chat-pack-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-c c l") 'chat-pack/load-pack!)
+    (define-key map (kbd "C-c c c") 'chat-pack/connect)
+    (define-key map (kbd "C-c c d") 'chat-pack/disconnect)
+    map)
+  "Keymap for git-pack mode.")
+
+(define-minor-mode chat-pack-mode
+  "Minor mode to consolidate chat-pack extensions.
+
+\\{chat-pack-mode-map}"
+  :lighter " CP"
+  :keymap chat-pack-mode-map)
+
+(define-globalized-minor-mode global-chat-pack-mode chat-pack-mode chat-pack-on)
+
+(defun chat-pack-on ()
+  "Turn on `chat-pack-mode'."
+  (chat-pack-mode +1))
+
+(global-chat-pack-mode)
 
 (provide 'chat-pack)
 ;;; chat-pack.el ends here

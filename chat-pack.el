@@ -6,7 +6,7 @@
 
 (use-package jabber)
 (use-package creds)
-(use-package jabber-otr )
+(use-package jabber-otr)
 
 ;; ===================== lib deps
 
@@ -52,11 +52,11 @@
 (defun chat-pack/connect-or-switch-to-buffer ()
   "Start the chat."
   (interactive)
-  (let* ((buffer-name "*-jabber-roster-*")
-         (buffer (get-buffer buffer-name)))
-    (if buffer
-        (switch-to-buffer buffer-name)
-      (call-interactively #'jabber-connect))))
+  (let* ((buffer (get-buffer jabber-roster-buffer)))
+    (if (and buffer jabber-connections)
+        (jabber-switch-to-roster-buffer)
+      (call-interactively #'jabber-connect)
+      (jabber-switch-to-roster-buffer))))
 
 (defalias 'chat-pack/disconnect 'jabber-disconnect)
 

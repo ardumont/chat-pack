@@ -1,7 +1,7 @@
 chat-pack
 =========
 
-A pack to setup one's irc credentials.
+A pack to setup one's jabber credentials.
 
 # Install
 
@@ -22,7 +22,7 @@ Add this snippet in your `prelude-packs.el`:
 ```
 # Setup
 
-Adding a line to the file `~/.authinfo`:
+Adding a line to the file `~/.authinfo(.gpg)`:
 
 ```txt
 machine jabber login your-email@gmail.com password your-password-for-this-account

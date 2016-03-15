@@ -49,7 +49,7 @@ But also that the entry 'jabber' exists."
                                (:connection-type . ,(intern connection-type))
                                (:port . ,(string-to-int connection-port)))))
                           '(jabber-vcard-avatars-retrieve nil)
-                          '(abber-chat-buffer-show-avatar nil))))
+                          '(jabber-chat-buffer-show-avatar nil))))
 
 (defun chat-pack-connect-or-switch-to-buffer ()
   "Start the chat."

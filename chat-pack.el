@@ -6,9 +6,7 @@
 
 (use-package jabber)
 (use-package creds)
-(use-package jabber-otr
-  :load-path "./jabber-otr.el"
-  :ensure nil)
+(use-package jabber-otr)
 
 ;; ===================== lib deps
 

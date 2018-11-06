@@ -4,13 +4,13 @@
 
 ;;; Code:
 
-(use-package jabber)
-(use-package creds)
-(use-package jabber-otr)
+(require 'jabber)
+(require 'creds)
+(require 'jabber-otr)
 
 ;; ===================== lib deps
 
-(use-package netrc)
+(require 'netrc)
 
 ;; ===================== setup file
 
